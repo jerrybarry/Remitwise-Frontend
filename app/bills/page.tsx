@@ -25,7 +25,7 @@ export default function Bills() {
         </section>
 
         {/* Unpaid Bills */}
-        <div className="mb-8">
+        <div className="">
           <UnpaidBillsSection />
         </div>
 
