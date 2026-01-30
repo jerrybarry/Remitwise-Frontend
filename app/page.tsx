@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useState, useRef } from "react";
 import {
   Send,
   PiggyBank,
@@ -9,8 +12,12 @@ import {
   Settings,
 } from "lucide-react";
 import FeatureSection from "@/components/FeatureSection";
+import WalletDropdown from "@/components/WalletDropdown";
 
 export default function Home() {
+  const [isWalletDropdownOpen, setIsWalletDropdownOpen] = useState(false);
+  const walletButtonRef = useRef<HTMLButtonElement>(null);
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Header */}
@@ -46,12 +53,24 @@ export default function Home() {
                 Settings
               </Link>
             </nav>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-              Connect Wallet
-            </button>
+            <div className="relative">
+              <button
+                ref={walletButtonRef}
+                onClick={() => setIsWalletDropdownOpen(!isWalletDropdownOpen)}
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+              >
+                Connect Wallet
+              </button>
+              <WalletDropdown
+                isOpen={isWalletDropdownOpen}
+                onClose={() => setIsWalletDropdownOpen(false)}
+                buttonRef={walletButtonRef}
+              />
+            </div>
           </div>
         </div>
       </header>
+
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
